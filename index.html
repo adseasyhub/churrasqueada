@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Tiffany Sales — Comunidade Oficial</title>
+  <meta name="description" content="Acesse a comunidade oficial gratuita da Tiffany Sales no Telegram para acompanhar bastidores, rotina e enquetes diárias." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google tag (gtag.js) — GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9XYYDY8BHD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9XYYDY8BHD');
+  </script>
+
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: #171a21;
+      --border: #262b36;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --accent: #229ed9; /* Azul Telegram */
+      --accent-hover: #1d8ec4;
+      --success: #16a34a;
+      --track: #222733;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 16px 28px;
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      margin: auto 0;
+    }
+
+    /* Card principal */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 22px 24px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      text-align: center;
+    }
+
+    /* Perfil */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .avatar-wrap {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #229ed9, #38bdf8);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #222733;
+      display: block;
+    }
+
+    .status-dot {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 14px;
+      height: 14px;
+      background: var(--success);
+      border: 2px solid var(--card);
+      border-radius: 50%;
+    }
+
+    .name-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .verified {
+      width: 18px;
+      height: 18px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .handle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Headline */
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .subtitle {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    /* Slider de Verificação */
+    .slider-section {
+      margin-bottom: 10px;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+
+    .slider-track {
+      position: relative;
+      width: 100%;
+      height: 60px;
+      background: var(--track);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      user-select: none;
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slider-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      background: linear-gradient(90deg, rgba(34, 158, 217, 0.25), rgba(34, 158, 217, 0.45));
+      border-radius: 999px;
+      pointer-events: none;
+      transition: background 0.2s ease;
+    }
+
+    .slider-text {
+      position: relative;
+      z-index: 1;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #d1d5db;
+      pointer-events: none;
+      padding-left: 34px;
+      transition: opacity 0.2s ease;
+    }
+
+    .slider-thumb {
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(34, 158, 217, 0.4);
+      transition: transform 0.1s ease, background 0.2s ease;
+    }
+
+    .slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(0.97);
+    }
+
+    .slider-thumb svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    .slider-track.unlocked .slider-fill {
+      background: linear-gradient(90deg, rgba(22, 163, 74, 0.25), rgba(22, 163, 74, 0.5));
+    }
+
+    .slider-track.unlocked .slider-thumb {
+      background: var(--success);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+      cursor: default;
+    }
+
+    /* Bloco Liberado (CTA Telegram) */
+    .unlocked-box {
+      display: none;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      animation: fadeIn 0.35s ease forwards;
+    }
+
+    .unlocked-box.visible {
+      display: block;
+    }
+
+    .unlocked-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #4ade80;
+      background: rgba(22, 163, 74, 0.14);
+      border: 1px solid rgba(22, 163, 74, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 18px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(34, 158, 217, 0.35);
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .cta-btn:active {
+      transform: scale(0.98);
+    }
+
+    .cta-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    .micro-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    /* Bloco Editorial (Compliance contra Thin Content) */
+    .info-card {
+      margin-top: 14px;
+      background: rgba(23, 26, 33, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 18px;
+      text-align: left;
+    }
+
+    .info-card h2 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-list li {
+      font-size: 0.83rem;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .info-list li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Rodapé Compliance */
+    footer {
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      margin-top: 26px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .disclaimer {
+      font-size: 0.7rem;
+      line-height: 1.4;
+      color: #6b7280;
+      margin-top: 6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <section class="card">
+      <!-- Identidade / Congruência com o Anúncio -->
+      <div class="profile">
+        <div class="avatar-wrap">
+          <!-- TROQUE O SRC ABAIXO PELA FOTO CASUAL DE ROSTO DA TIFFANY -->
+          <img
+            class="avatar"
+            src="./assets/tiffany.webp"
+            alt="Tiffany Sales"
+            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23222733%22/><text x=%2250%22 y=%2258%22 font-family=%22sans-serif%22 font-size=%2236%22 font-weight=%22bold%22 fill=%22%23229ed9%22 text-anchor=%22middle%22>TS</text></svg>'"
+          />
+          <span class="status-dot" title="Comunidade ativa"></span>
+        </div>
+
+        <div class="name-row">
+          <span>Tiffany Sales</span>
+          <svg class="verified" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l2.39 2.13 3.16-.27.87 3.06 2.86 1.43-.89 3.05.89 3.05-2.86 1.43-.87 3.06-3.16-.27L12 22l-2.39-2.13-3.16.27-.87-3.06-2.86-1.43.89-3.05-.89-3.05 2.86-1.43.87-3.06 3.16.27L12 2zm-1.1 13.4l5.2-5.2-1.4-1.4-3.8 3.8-1.8-1.8-1.4 1.4 3.2 3.2z"/>
+          </svg>
+        </div>
+        <div class="handle">Comunidade Oficial • Canal Gratuito</div>
+      </div>
+
+      <!-- Contexto Claro e Seguro -->
+      <h1>Bastidores e Conteúdos Sem Cortes</h1>
+      <p class="subtitle">
+        Para evitar robôs e manter o grupo organizado, arraste o botão abaixo e libere seu convite gratuito.
+      </p>
+
+      <!-- Slider Interativo -->
+      <div class="slider-section">
+        <div class="slider-labels">
+          <span>Arraste para a direita →</span>
+          <span id="slider-status">Bloqueado</span>
+        </div>
+
+        <div class="slider-track" id="slider-track">
+          <div class="slider-fill" id="slider-fill"></div>
+          <span class="slider-text" id="slider-text">Arraste para liberar</span>
+
+          <div
+            class="slider-thumb"
+            id="slider-thumb"
+            role="slider"
+            tabindex="0"
+            aria-label="Arraste para liberar o acesso ao Telegram"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <!-- Ícone Seta -->
+            <svg id="thumb-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M13.17 12l-4.95-4.95 1.41-1.41L16 12l-6.36 6.36-1.41-1.41z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Área Revelada Após o Arraste -->
+      <div class="unlocked-box" id="unlocked-box">
+        <div class="unlocked-badge">✓ Acesso liberado</div>
+
+        <!-- TROQUE O HREF ABAIXO PELO LINK DO SEU CANAL NO TELEGRAM -->
+        <a
+          href="https://t.me/ALoiraDoVelho_bot"
+          id="btn-telegram-vip"
+          class="cta-btn"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+          </svg>
+          <span>ENTRAR NO CANAL DO TELEGRAM</span>
+        </a>
+
+        <p class="micro-note">Entrada 100% gratuita • Saia quando quiser</p>
+      </div>
+    </section>
+
+    <!-- Bloco Editorial para dar Contexto ao Robô do Google -->
+    <section class="info-card" aria-label="Sobre a comunidade">
+      <h2>O que você encontra na comunidade:</h2>
+      <ul class="info-list">
+        <li>Bastidores completos e gravações que não cabem nos cortes rápidos.</li>
+        <li>Rotina diária, relatos e enquetes interativas com a audiência.</li>
+        <li>Ambiente reservado com atualizações diretas no seu celular.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Rodapé de Compliance -->
+  <footer>
+    <div class="footer-links">
+      <a href="politica-de-privacidade.html">Política de Privacidade</a>
+      <a href="termos-de-uso.html">Termos de Uso</a>
+    </div>
+    <p>©️ 2026 Tiffany Sales. Todos os direitos reservados.</p>
+    <p class="disclaimer">
+      Este site não faz parte do YouTube, Google LLC ou Telegram e não é endossado por nenhuma dessas empresas.
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      const track = document.getElementById('slider-track');
+      const thumb = document.getElementById('slider-thumb');
+      const fill = document.getElementById('slider-fill');
+      const text = document.getElementById('slider-text');
+      const statusLabel = document.getElementById('slider-status');
+      const unlockedBox = document.getElementById('unlocked-box');
+      const thumbIcon = document.getElementById('thumb-icon');
+
+      let isDragging = false;
+      let isUnlocked = false;
+      let startX = 0;
+      let currentLeft = 4;
+
+      function getMaxLeft() {
+        return track.clientWidth - thumb.clientWidth - 4;
+      }
+
+      function updatePosition(newLeft) {
+        const maxLeft = getMaxLeft();
+        currentLeft = Math.max(4, Math.min(newLeft, maxLeft));
+        const progress = Math.round(((currentLeft - 4) / (maxLeft - 4)) * 100);
+
+        thumb.style.left = currentLeft + 'px';
+        fill.style.width = (currentLeft + thumb.clientWidth) + 'px';
+        thumb.setAttribute('aria-valuenow', progress);
+        text.style.opacity = Math.max(0, 1 - progress / 65);
+
+        if (progress >= 92 && !isUnlocked) {
+          completeUnlock();
+        }
+      }
+
+      function completeUnlock() {
+        if (isUnlocked) return;
+        isUnlocked = true;
+        isDragging = false;
+
+        const maxLeft = getMaxLeft();
+        thumb.style.left = maxLeft + 'px';
+        fill.style.width = '100%';
+        thumb.setAttribute('aria-valuenow', '100');
+        track.classList.add('unlocked');
+
+        text.textContent = 'Abrindo Telegram...';
+        text.style.opacity = '1';
+        text.style.paddingLeft = '0';
+        statusLabel.textContent = 'Liberado';
+
+        // Troca ícone para Check
+        thumbIcon.innerHTML = '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>';
+
+        // Mantém o botão visível como plano B caso o navegador bloqueie a abertura automática
+        unlockedBox.classList.add('visible');
+
+        const telegramUrl = 'https://t.me/ALoiraDoVelho_bot';
+
+        if (typeof gtag === 'function') {
+          gtag('event', 'telegram_outbound', {
+            page_type: 'presell_telegram',
+            trigger: 'slider',
+            link_url: telegramUrl,
+            transport_type: 'beacon'
+          });
+        }
+
+        window.location.replace(telegramUrl);
+      }
+
+      function resetSlider() {
+        if (isUnlocked) return;
+        thumb.style.transition = 'left 0.25s ease';
+        fill.style.transition = 'width 0.25s ease';
+        updatePosition(4);
+        setTimeout(() => {
+          thumb.style.transition = '';
+          fill.style.transition = '';
+        }, 260);
+      }
+
+      function onStart(clientX) {
+        if (isUnlocked) return;
+        isDragging = true;
+        startX = clientX - currentLeft;
+      }
+
+      function onMove(clientX) {
+        if (!isDragging || isUnlocked) return;
+        updatePosition(clientX - startX);
+      }
+
+      function onEnd() {
+        if (!isDragging || isUnlocked) return;
+        isDragging = false;
+        resetSlider();
+      }
+
+      // Mouse
+      thumb.addEventListener('mousedown', (e) => {
+        if (e.isTrusted) onStart(e.clientX);
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (e.isTrusted) onMove(e.clientX);
+      });
+      window.addEventListener('mouseup', (e) => {
+        if (e.isTrusted) onEnd();
+      });
+
+      // Touch (Mobile)
+      thumb.addEventListener('touchstart', (e) => {
+        if (e.isTrusted) onStart(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (e.isTrusted && isDragging) onMove(e.touches[0].clientX);
+      }, { passive: true });
+      window.addEventListener('touchend', (e) => {
+        if (e.isTrusted) onEnd();
+      });
+
+      // Acessibilidade (Teclado)
+      thumb.addEventListener('keydown', (e) => {
+        if (!e.isTrusted) return;
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (!isUnlocked) completeUnlock();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
