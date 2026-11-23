@@ -510,23 +510,23 @@
         text.style.paddingLeft = '0';
         statusLabel.textContent = 'Redirecionando';
 
-        let redirected = false;
-        const fallbackTimeout = window.setTimeout(() => {
-          if (!redirected && !document.hidden) {
-            window.location.replace('https://www.google.com');
-          }
-        }, 1500);
+        const checkoutUrl = 'https://pay.sharkautomacoes.com/0230b873';
+        let checkoutStarted = false;
+        let fallbackTimeout;
 
-        const cancelFallback = () => {
-          redirected = true;
+        const redirectToCheckout = () => {
+          if (checkoutStarted || document.hidden) return;
+          checkoutStarted = true;
           window.clearTimeout(fallbackTimeout);
+          window.location.replace(checkoutUrl);
         };
 
-        window.addEventListener('blur', cancelFallback, { once: true });
-        window.addEventListener('pagehide', cancelFallback, { once: true });
+        fallbackTimeout = window.setTimeout(redirectToCheckout, 2500);
+        window.addEventListener('focus', redirectToCheckout);
+        window.addEventListener('pageshow', redirectToCheckout);
         document.addEventListener('visibilitychange', () => {
-          if (document.hidden) cancelFallback();
-        }, { once: true });
+          if (!document.hidden) redirectToCheckout();
+        });
 
         window.location.replace(telegramUrl);
       }
